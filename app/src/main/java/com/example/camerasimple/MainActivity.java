@@ -3,7 +3,6 @@ package com.example.camerasimple;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -21,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int REQUEST_TAKE_PHOTO = 1;
 
     Button mCaptureBtn;
     ImageView mImageView;
@@ -43,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // check permissions
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
-                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                     // if not enabled, request
                     String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                     requestPermissions(permission, PERMISSION_CODE);
@@ -75,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case PERMISSION_CODE: {
                 if (grantResults.length > 0 && grantResults[0] ==
-                    PackageManager.PERMISSION_GRANTED) {
-                        // permission granted on popup
-                        openCamera();
-                    } else {
-                        // permission denied on popup
+                        PackageManager.PERMISSION_GRANTED) {
+                    // permission granted on popup
+                    openCamera();
+                } else {
+                    // permission denied on popup
                     Toast.makeText(this, "Permission denied...", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -94,4 +91,5 @@ public class MainActivity extends AppCompatActivity {
             mImageView.setImageURI(image_uri);
         }
     }
+
 }
