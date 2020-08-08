@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                     requestPermissions(permission, PERMISSION_CODE);
                 } else {
-                    // permissions granted
+                    // permissions already granted
                     openCamera();
                 }
             }
@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
-
     }
 
     // handle permissions requests
