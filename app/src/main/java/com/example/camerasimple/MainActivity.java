@@ -18,9 +18,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    // constants
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
 
+    // UI components
     Button mCaptureBtn;
     ImageView mImageView;
     Uri image_uri;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mImageView = findViewById(R.id.image_view);
         mCaptureBtn = findViewById(R.id.capture_btn);
 
-        // On Button click
+        // Runtime permissions
         mCaptureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,14 +54,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // camera intent
     private void openCamera() {
-        // Sets full to MediaSotre (gallery)
+        // Sets path to MediaStore (gallery)
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE,"New Picture");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From the camera");
         image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
-        // Camera intent
+        // intent
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
@@ -69,21 +72,17 @@ public class MainActivity extends AppCompatActivity {
     // handle permissions requests
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_CODE: {
-                if (grantResults.length > 0 && grantResults[0] ==
-                        PackageManager.PERMISSION_GRANTED) {
-                    // permission granted on popup
-                    openCamera();
-                } else {
-                    // permission denied on popup
-                    Toast.makeText(this, "Permission denied...", Toast.LENGTH_SHORT).show();
-                }
+        if (requestCode == PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(this, "Permission denied...", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    // when image captured from camera
+    // set ImageView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

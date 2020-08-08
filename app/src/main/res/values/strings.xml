@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CameraSimple</string>
+    <string name="icon_description">Place for Camera Shot</string>
+    <string name="button_text">capture</string>
 </resources>
