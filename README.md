@@ -4,7 +4,7 @@
 
 ## Procedure:
 
-1. Define CAMERA, WRITE_EXTERNAL_STORAGE permissions and camera feature in `Manifest`
+1. Define `CAMERA`, `WRITE_EXTERNAL_STORAGE` permissions and camera feature in `Manifest`
 2. Define `ImageView` and `Button` in layouts
 3. Initiate runtime permissions for camera and external storage
 4. Handle permissions with `onRequestPermissionsResult()`
