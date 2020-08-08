@@ -1,3 +1,3 @@
 # Simple Camera intent
 
-![CameraDemo](./Screenshots/camera_demo.gif)
+<img src="./Screenshots/camera_demo.gif" width="300">
